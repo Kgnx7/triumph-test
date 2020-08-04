@@ -1,42 +1,41 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { v4 as uuidv4 } from 'uuid'
 
-export const counterSlice = createSlice({
-    name: 'counter',
+export const recordsListSlice = createSlice({
+    name: 'recordsList',
     initialState: {
-        value: 0,
+        records: [],
     },
     reducers: {
-        increment: (state) => {
-            // Redux Toolkit allows us to write "mutating" logic in reducers. It
-            // doesn't actually mutate the state because it uses the Immer library,
-            // which detects changes to a "draft state" and produces a brand new
-            // immutable state based off those changes
-            state.value += 1
+        create: (state, { payload }) => {
+            state.records = [...state.records, payload]
         },
-        decrement: (state) => {
-            state.value -= 1
+        remove: (state, { payload }) => {
+            state.records = state.records.filter(
+                (record) => record.id !== payload
+            )
         },
-        incrementByAmount: (state, action) => {
-            state.value += action.payload
+        edit: (state, { payload }) => {
+            state.records = state.records.map((record) =>
+                record.id === payload.id ? payload : record
+            )
         },
     },
 })
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export const { create, remove, edit } = recordsListSlice.actions
 
-// The function below is called a thunk and allows us to perform async logic. It
-// can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
-// will call the thunk with the `dispatch` function as the first argument. Async
-// code can then be executed and other actions can be dispatched
-export const incrementAsync = (amount) => (dispatch) => {
-    setTimeout(() => {
-        dispatch(incrementByAmount(amount))
-    }, 1000)
+export const createRecord = (newRecord) => (dispatch) => {
+    dispatch(
+        create({
+            ...newRecord,
+            id: uuidv4(),
+        })
+    )
 }
 
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state) => state.counter.value)`
-export const selectCount = (state) => state.counter.value
+export const editRecord = (editedRecord) => (dispatch) => {
+    dispatch(edit(editedRecord))
+}
 
-export default counterSlice.reducer
+export default recordsListSlice.reducer
