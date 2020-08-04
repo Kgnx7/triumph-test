@@ -8,6 +8,14 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import { v4 as uuidv4 } from 'uuid'
 import { createRecord } from './recordsListSlice'
 import { useDispatch } from 'react-redux'
+import { ChromePicker } from 'react-color'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+    chromePicker: {
+        margin: '15px auto',
+    },
+}))
 
 export default function CreateItemDialog({ open, onClose }) {
     const [name, setName] = useState(null)
@@ -16,7 +24,7 @@ export default function CreateItemDialog({ open, onClose }) {
     const dispatch = useDispatch()
     const handleChangeName = (event) => setName(event.target.value)
     const handleChangeType = (event) => setType(event.target.value)
-    const handleChangeColor = (event) => setColor(event.target.value)
+    const classes = useStyles()
 
     const resetState = () => {
         setName(null)
@@ -39,6 +47,10 @@ export default function CreateItemDialog({ open, onClose }) {
             })
         )
         handleClose()
+    }
+
+    const handleChangeColorComplete = (color, event) => {
+        setColor(color.hex)
     }
 
     return (
@@ -75,7 +87,12 @@ export default function CreateItemDialog({ open, onClose }) {
                     fullWidth
                     required
                 />
-                <TextField
+                <ChromePicker
+                    className={classes.chromePicker}
+                    color={color}
+                    onChangeComplete={handleChangeColorComplete}
+                />
+                {/* <TextField
                     value={color}
                     onChange={handleChangeColor}
                     autoFocus
@@ -85,7 +102,7 @@ export default function CreateItemDialog({ open, onClose }) {
                     type="color"
                     fullWidth
                     required
-                />
+                /> */}
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose} color="primary">

@@ -2,6 +2,8 @@ import React from 'react'
 
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { useTheme } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
     header: {
@@ -20,10 +22,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
     const classes = useStyles()
+    const theme = useTheme()
+    const matches = useMediaQuery(theme.breakpoints.down('sm'))
 
     return (
         <header className={classes.header}>
-            <Typography variant="h2" align="center">
+            <Typography variant={matches ? 'h4' : 'h2'} align="center">
                 Трёхмерные решения для сайтов{' '}
                 <a
                     href="https://www.blend4web.com"

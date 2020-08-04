@@ -20,7 +20,8 @@ import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@material-ui/icons/Search'
 import CreateIcon from '@material-ui/icons/Create'
-
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { useTheme } from '@material-ui/core/styles'
 import debounce from 'lodash/debounce'
 
 import EditRecordDialog from './EditRecordDialog'
@@ -107,6 +108,8 @@ const useToolbarStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(5),
         paddingLeft: theme.spacing(2),
         paddingRight: theme.spacing(1),
+        display: 'flex',
+        // flexWrap: 'wrap',
     },
     highlight:
         theme.palette.type === 'light'
@@ -162,6 +165,8 @@ const useToolbarStyles = makeStyles((theme) => ({
 const EnhancedTableToolbar = ({ onFilterChange, onCreate }) => {
     const classes = useToolbarStyles()
     const [filterInputValue, setFilterInputValue] = useState('')
+    const theme = useTheme()
+    const matches = useMediaQuery(theme.breakpoints.down('xs'))
 
     const onFilterChangeDebounced = useRef(debounce(onFilterChange, 500))
         .current
@@ -179,7 +184,10 @@ const EnhancedTableToolbar = ({ onFilterChange, onCreate }) => {
     }
 
     return (
-        <Toolbar className={clsx(classes.root)}>
+        <Toolbar
+            className={clsx(classes.root)}
+            style={{ flexWrap: matches ? 'wrap' : 'nowrap' }}
+        >
             <Typography
                 className={classes.title}
                 variant="h6"
@@ -226,11 +234,11 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(3),
     },
     table: {
-        minWidth: 750,
+        // minWidth: 500,
     },
 }))
 
-export default function EnhancedTable({ isBigDataRequired }) {
+export default function EnhancedTable() {
     const classes = useStyles()
     const dispatch = useDispatch()
     const [order, setOrder] = useState('asc')
@@ -322,7 +330,10 @@ export default function EnhancedTable({ isBigDataRequired }) {
                                             <TableCell align="center">
                                                 {row.type}
                                             </TableCell>
-                                            <TableCell align="center">
+                                            <TableCell
+                                                align="center"
+                                                style={{ color: row.color }}
+                                            >
                                                 {row.color}
                                             </TableCell>
                                         </TableRow>

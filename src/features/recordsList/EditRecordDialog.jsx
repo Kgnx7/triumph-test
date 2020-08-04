@@ -9,9 +9,13 @@ import { makeStyles } from '@material-ui/core/styles'
 import red from '@material-ui/core/colors/red'
 import { editRecord, removeRecord } from './recordsListSlice'
 import { useDispatch } from 'react-redux'
+import { ChromePicker } from 'react-color'
 
 const useStyles = makeStyles((theme) => ({
     deleteButton: { color: red[500] },
+    chromePicker: {
+        margin: '15px auto',
+    },
 }))
 
 export default function EditRecordDialog({ record, open, onClose }) {
@@ -24,7 +28,6 @@ export default function EditRecordDialog({ record, open, onClose }) {
 
     const handleChangeName = (event) => setName(event.target.value)
     const handleChangeType = (event) => setType(event.target.value)
-    const handleChangeColor = (event) => setColor(event.target.value)
 
     const handleClose = () => {
         onClose()
@@ -45,6 +48,10 @@ export default function EditRecordDialog({ record, open, onClose }) {
     const handleDelete = () => {
         dispatch(removeRecord(record.id))
         handleClose()
+    }
+
+    const handleChangeColorComplete = (color, event) => {
+        setColor(color.hex)
     }
 
     return (
@@ -81,16 +88,10 @@ export default function EditRecordDialog({ record, open, onClose }) {
                     fullWidth
                     required
                 />
-                <TextField
-                    value={color}
-                    onChange={handleChangeColor}
-                    autoFocus
-                    margin="dense"
-                    id="color"
-                    label="Цвет"
-                    type="color"
-                    fullWidth
-                    required
+                <ChromePicker
+                    className={classes.chromePicker}
+                    color={color}
+                    onChangeComplete={handleChangeColorComplete}
                 />
             </DialogContent>
             <DialogActions>
