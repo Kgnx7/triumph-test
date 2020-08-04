@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { v4 as uuidv4 } from 'uuid'
 
 export const recordsListSlice = createSlice({
     name: 'recordsList',
@@ -26,16 +25,15 @@ export const recordsListSlice = createSlice({
 export const { create, remove, edit } = recordsListSlice.actions
 
 export const createRecord = (newRecord) => (dispatch) => {
-    dispatch(
-        create({
-            ...newRecord,
-            id: uuidv4(),
-        })
-    )
+    dispatch(create(newRecord))
 }
 
 export const editRecord = (editedRecord) => (dispatch) => {
     dispatch(edit(editedRecord))
+}
+
+export const removeRecord = (recordId) => (dispatch) => {
+    dispatch(remove(recordId))
 }
 
 export default recordsListSlice.reducer

@@ -1,0 +1,104 @@
+import React, { useState } from 'react'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import { v4 as uuidv4 } from 'uuid'
+import { createRecord } from './recordsListSlice'
+import { useDispatch } from 'react-redux'
+
+export default function CreateItemDialog({ open, onClose }) {
+    const [name, setName] = useState(null)
+    const [type, setType] = useState(null)
+    const [color, setColor] = useState(null)
+    const dispatch = useDispatch()
+    const handleChangeName = (event) => setName(event.target.value)
+    const handleChangeType = (event) => setType(event.target.value)
+    const handleChangeColor = (event) => setColor(event.target.value)
+
+    const resetState = () => {
+        setName(null)
+        setType(null)
+        setColor(null)
+    }
+
+    const handleClose = () => {
+        onClose()
+        resetState()
+    }
+
+    const handleSubmit = (event) => {
+        dispatch(
+            createRecord({
+                id: uuidv4(),
+                name,
+                type,
+                color,
+            })
+        )
+        handleClose()
+    }
+
+    return (
+        <Dialog
+            open={open}
+            fullWidth
+            maxWidth="sm"
+            onClose={handleClose}
+            aria-labelledby="form-dialog-title"
+        >
+            <DialogTitle id="form-dialog-title">
+                Добавление данных 👨‍💻
+            </DialogTitle>
+            <DialogContent>
+                <TextField
+                    value={name}
+                    onChange={handleChangeName}
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Имя"
+                    type="text"
+                    fullWidth
+                    required
+                />
+                <TextField
+                    value={type}
+                    onChange={handleChangeType}
+                    autoFocus
+                    margin="dense"
+                    id="type"
+                    label="Тип"
+                    type="text"
+                    fullWidth
+                    required
+                />
+                <TextField
+                    value={color}
+                    onChange={handleChangeColor}
+                    autoFocus
+                    margin="dense"
+                    id="color"
+                    label="Цвет"
+                    type="color"
+                    fullWidth
+                    required
+                />
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                    Отмена
+                </Button>
+                <Button
+                    onClick={handleSubmit}
+                    color="primary"
+                    disabled={!(name && type && color)}
+                >
+                    Добавить
+                </Button>
+            </DialogActions>
+        </Dialog>
+    )
+}

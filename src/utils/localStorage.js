@@ -3,10 +3,10 @@ export const loadState = () => {
         const serializedState = localStorage.getItem('state')
 
         return serializedState === null
-            ? undefiend
+            ? undefined
             : JSON.parse(serializedState)
     } catch (err) {
-        return undefiend
+        return undefined
     }
 }
 

@@ -1,5 +1,10 @@
 import React from 'react'
+import RecordsList from '../../features/recordsList'
 
 export default function Main() {
-    return <main>main tag</main>
+    return (
+        <main>
+            <RecordsList />
+        </main>
+    )
 }
