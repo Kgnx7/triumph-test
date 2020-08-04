@@ -173,7 +173,7 @@ const EnhancedTableToolbar = ({ onFilterChange, onCreate }) => {
 
     useEffect(() => {
         return () => {
-            onFilterChangeDebounced.clear()
+            onFilterChangeDebounced.cancel()
         }
     }, [])
 
