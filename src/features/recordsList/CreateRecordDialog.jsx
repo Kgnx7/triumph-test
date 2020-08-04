@@ -18,18 +18,18 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function CreateItemDialog({ open, onClose }) {
-    const [name, setName] = useState(null)
-    const [type, setType] = useState(null)
-    const [color, setColor] = useState(null)
+    const [name, setName] = useState('')
+    const [type, setType] = useState('')
+    const [color, setColor] = useState('')
     const dispatch = useDispatch()
     const handleChangeName = (event) => setName(event.target.value)
     const handleChangeType = (event) => setType(event.target.value)
     const classes = useStyles()
 
     const resetState = () => {
-        setName(null)
-        setType(null)
-        setColor(null)
+        setName('')
+        setType('')
+        setColor('')
     }
 
     const handleClose = () => {
