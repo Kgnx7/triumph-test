@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/triumph-test/static/css/main.9627b320.chunk.css",
-    "main.js": "/triumph-test/static/js/main.2a2720ea.chunk.js",
-    "main.js.map": "/triumph-test/static/js/main.2a2720ea.chunk.js.map",
+    "main.js": "/triumph-test/static/js/main.11c15431.chunk.js",
+    "main.js.map": "/triumph-test/static/js/main.11c15431.chunk.js.map",
     "runtime-main.js": "/triumph-test/static/js/runtime-main.2e3e31dd.js",
     "runtime-main.js.map": "/triumph-test/static/js/runtime-main.2e3e31dd.js.map",
     "static/js/2.9f081f20.chunk.js": "/triumph-test/static/js/2.9f081f20.chunk.js",
     "static/js/2.9f081f20.chunk.js.map": "/triumph-test/static/js/2.9f081f20.chunk.js.map",
     "index.html": "/triumph-test/index.html",
-    "precache-manifest.a26b74f57d23315d36142687dcf20a58.js": "/triumph-test/precache-manifest.a26b74f57d23315d36142687dcf20a58.js",
+    "precache-manifest.516f7cf0cbc2a7d10dec5334ca68a1aa.js": "/triumph-test/precache-manifest.516f7cf0cbc2a7d10dec5334ca68a1aa.js",
     "service-worker.js": "/triumph-test/service-worker.js",
     "static/css/main.9627b320.chunk.css.map": "/triumph-test/static/css/main.9627b320.chunk.css.map",
     "static/js/2.9f081f20.chunk.js.LICENSE.txt": "/triumph-test/static/js/2.9f081f20.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.2e3e31dd.js",
     "static/js/2.9f081f20.chunk.js",
     "static/css/main.9627b320.chunk.css",
-    "static/js/main.2a2720ea.chunk.js"
+    "static/js/main.11c15431.chunk.js"
   ]
 }
