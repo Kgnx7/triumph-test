@@ -92,17 +92,6 @@ export default function CreateItemDialog({ open, onClose }) {
                     color={color}
                     onChangeComplete={handleChangeColorComplete}
                 />
-                {/* <TextField
-                    value={color}
-                    onChange={handleChangeColor}
-                    autoFocus
-                    margin="dense"
-                    id="color"
-                    label="Цвет"
-                    type="color"
-                    fullWidth
-                    required
-                /> */}
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose} color="primary">
